@@ -1,0 +1,13 @@
+Network Detection with Javascript
+
+URL: http://www.cloudspokes.com/challenge_detail.html?contestID=155
+Blog: http://blog.cloudspokes.com/2011/04/i-detect-cloudspokes-winner.html
+Challenge end date: Sun Mar 27 01:00:00 GMT 2011
+
+Description
+===========
+We’d like to build a corporate network detection system with JavaScript for Force.com. During many development projects, the use case comes up where the developer has different logic based upon whether or not the current users is on their corporate network. This could be altered security restrictions, access to network resources or a different process all together.
+
+Requirements
+============
+In the past coal miners used to bring canaries into the mine with them to detect dangerous methane gas levels. Now in the cloud we&#39;ll use the <a href="http://cloudspokes.s3.amazonaws.com/canary.jpeg" target="_blank">canary</a> to see if we are on the right network! Your application will be responsible for testing to see if we can pull the canary! The application should consist of a single Visualforce page and an Apex controller. Client-side Javascript in the Visualforce page should attempt to load an image by URL (e.g., <a href="http://cloudspokes.s3.amazonaws.com/canary.jpeg" target="_blank">canary</a>) and pass the results (true or false if successful) to the controller. If the image was successfully loaded, pass a true value to the controller and display, “Image loaded successfully” on the Visualforce page. If the image failed to load (simply use a URL that doesn’t exist), then pass a false value to the controller and display “Failed to load” on the Visualforce page. Please provide the use case for a URL that loads successfully and one that fails. It is OK to hard-code the URLs for the image in the Visualforce page and you can simply comment out one or the other to run your tests. You must also provide unit test coverage of at least 90% for your code.

@@ -1,0 +1,41 @@
+<apex:page controller="NetworkDetection">
+	<!-- Using jQuery to reduce cross browser compatibility issues...and make the dev's life happier -->
+	<apex:includeScript value="https://ajax.googleapis.com/ajax/libs/jquery/1.5.1/jquery.min.js"/>
+	
+	<script type="text/javascript">
+		//Make jQuery run in no conflict mode so it does not conflict with any SFDC js libraries
+		var j$ = jQuery.noConflict();
+		
+		//Execute javascript when DOM becomes ready
+		j$(document).ready(function(){
+			/*Create event listeners for image, one for load and one for error, and call 
+			setImageLoaded actionFunction with the image load result*/
+			j$("#networkImg").load(function(){
+				setImageLoaded('true'); 
+			}).error(function(){
+			    setImageLoaded('false');
+			});
+		});
+	</script>
+	
+	<apex:form >
+		<!-- actionFunction that can be called from JavaScript above will pass result of image load to controller. It will
+		also rerender results panel to display the appropriate messaging -->
+		<apex:actionFunction name="setImageLoaded" action="{!setImageLoaded}" rerender="result">
+			<apex:param name="imageLoaded" value=""/>  
+		</apex:actionFunction>
+	
+		<!-- By making isImageLoaded a string variable, rather than a boolean, we have have more than 2 possible values (Visualforce
+		interprets null as false) and can display an authorization in progress method before the isImageLoaded variable in the controller is set -->
+		<apex:outputPanel id="result" layout="block">
+			<apex:outputText value="Authorization in progress..." rendered="{!isImageLoaded == ''}"/>
+			<apex:outputText value="Image loaded. Access granted!!!" rendered="{!isImageLoaded == 'true'}"/>
+			<apex:outputText value="Image not loaded. Access denied!!!!!" rendered="{!isImageLoaded == 'false'}"/>
+		</apex:outputPanel>
+		
+		<!-- Images we will check to see if they load successfully. You could even set the style of this image to display:none 
+		so it doesn't take up visible space and the JavaScript image load detection will still work -->
+		<img id="networkImg" src="http://cloudspokes.s3.amazonaws.com/canary.jpeg"/>
+		<!--<img id="networkImg" src="http://badImage-aojojfaSDFAFasDFdsfea32432432.com/canary.jpeg"/>-->
+	</apex:form>
+</apex:page>
